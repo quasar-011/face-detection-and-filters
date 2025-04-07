@@ -116,7 +116,7 @@ Face detection is performed using OpenCV’s pre-trained Haar cascade classifier
 
 ## License
 
-This project is open-source and available under the MIT License.
+This project is open-source and available under the MIT License[LICENSE].
 
 ---
 
