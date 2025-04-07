@@ -113,6 +113,32 @@ Face detection is performed using OpenCV’s pre-trained Haar cascade classifier
 - Allow custom filter creation using sliders for parameters like blur intensity, edge thresholds, etc.
 
 ---
+## DNN Enhancement
+
+To further improve the performance and accuracy of face detection, this project was extended using OpenCV's `cv2.dnn` module with a deep neural network (DNN)-based face detector. Unlike Haar cascades, which rely on handcrafted features and perform well only under ideal lighting and pose conditions, the DNN approach uses a pre-trained Single Shot Multibox Detector (SSD) with a ResNet-10 backbone. This model processes each frame through a deep learning pipeline, significantly increasing accuracy and robustness against variations in lighting, angle, and background.
+
+The main changes involved:
+- Loading the DNN model using `cv2.dnn.readNetFromCaffe()`
+- Preprocessing video frames using `cv2.dnn.blobFromImage()`
+- Performing detection using `net.forward()`, with confidence thresholds
+- Drawing bounding boxes only for confident predictions
+- Retaining the same real-time filtering pipeline
+
+This enhancement allows more consistent and reliable face detection, especially in noisy or poorly lit environments.
+
+## Side-by-Side Results
+
+| Scenario                  | Haar Cascade Output                                | DNN-Based Output                                 |
+|---------------------------|-----------------------------------------------------|--------------------------------------------------|
+| Good lighting, frontal face | Accurate detection, minor misses at angles         | Accurate and confident detection                 |
+| Poor lighting             | Often fails, high false negatives                  | Detects reliably, maintains accuracy             |
+| Multiple faces            | May miss some, slower with many faces              | Detects all faces and maintains processing speed |
+| Tilted face / Partial view | Often fails, low robustness                        | High robustness and consistent detection         |
+| Processing speed          | Very fast (CPU-based)                              | Slightly slower due to DNN model processing      |
+
+Note: DNN is more reliable but requires additional model files and slightly more compute resources.
+
+---
 
 ## License
 
