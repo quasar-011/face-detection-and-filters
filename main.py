@@ -15,7 +15,7 @@ def filter(frame, mode):
         return cartoon
     return frame
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 mode = None 
 print("Press: g=Gray | b=Blur | e=Edges | c=Cartoon | n=None | s=Save | q=Quit")
